@@ -8,8 +8,7 @@ scipy
 matplotlib  
 toolz  
 tensorflow >= 2.2  
-tensorflow-datasets  
 
 SAND No: 
 
-[1] R. G. Patel, N. A. Trask, M. A. Gulian, and E. C. Cyr. A block coordinate descent optimizer for classification problems exploiting convexity. arXiv preprint arXiv:2006.10123, 2020.
+[1] R. G. Patel, I. Manickam, N. A. Trask, M. A. Wood, M. Lee, I. Tomas, E. C. Cyr. Thermodynamically consistent physics-informed neural networks for hyperbolic systems. arXiv preprint arXiv:2012.05343, 2020.
