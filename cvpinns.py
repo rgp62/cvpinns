@@ -100,4 +100,4 @@ class PDE:
         F1int  = self.dx[0]/2*tf.tensordot(F1i,self.wi1,[1,0])
         return  (F0int[1::] - F0int[0:-1])  \
                +(F1int[:,1::] - F1int[:,0:-1])
- 
+
