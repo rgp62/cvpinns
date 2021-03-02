@@ -3,6 +3,23 @@ import tensorflow as tf
 
 class PDE:
     def __init__(self,L,nx,quad,F0,F1,IC,BCl,BCr,u):
+        """
+        Inputs:
+            L:    2d list containing the lower and upper bounds of the domain in each direction,
+                  [[x0min,x0max],[x1min,x1max]]
+            nx:   1d list containing the number of cells in each direction
+            quad: dictionary specifying quadratures, {'0':(wi0,xi0),'1',(wi1,xi1)}. (wi0,xi0)
+                  and (wi1,xi1) are the weights and biases used to integrate fluxes in the 0 and 1 
+                  directions, respectively. Abscissas \in [-1,1] and \sum {weights} = 2
+            F0:   function that computes flux in 0 direction, given u
+            F1:   function that computes flux in 1 direction, given u
+            IC:   function that computes flux in 0 direction along x0=x0min
+            BCl:  function that computes flux in 1 direction along x1=x1min
+            BCr:  function that computes flux in 1 direction along x1=x1max
+            u:    neural network for PDE solution
+        """
+        
+        
         self.F0 = F0
         self.F1 = F1
         self.IC = IC
@@ -84,6 +101,11 @@ class PDE:
     
     @tf.function
     def getRES(self):
+        """
+        Outputs:
+            RES: CVPINNs residual
+        """
+        
         F0h = tf.concat([self.F0(self.BCl(self.x0_1L)),
                                     tf.concat([self.F0(self.IC(self.x0_0L)),
                                            self.F0(self.u(self.x0_I))],0),
@@ -98,6 +120,7 @@ class PDE:
         
         F0int  = self.dx[1]/2*tf.tensordot(F0i,self.wi0,[2,0])
         F1int  = self.dx[0]/2*tf.tensordot(F1i,self.wi1,[1,0])
-        return  (F0int[1::] - F0int[0:-1])  \
-               +(F1int[:,1::] - F1int[:,0:-1])
+        RES = (F0int[1::] - F0int[0:-1])  \
+             +(F1int[:,1::] - F1int[:,0:-1])
+        return RES
  
