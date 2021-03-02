@@ -9,6 +9,6 @@ matplotlib
 toolz  
 tensorflow >= 2.2  
 
-SAND No: 
+SAND No: SAND2021-2386 O
 
 [1] R. G. Patel, I. Manickam, N. A. Trask, M. A. Wood, M. Lee, I. Tomas, E. C. Cyr. Thermodynamically consistent physics-informed neural networks for hyperbolic systems. arXiv preprint arXiv:2012.05343, 2020.
